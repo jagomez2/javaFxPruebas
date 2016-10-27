@@ -13,7 +13,7 @@ public class ComboBoxCell extends TableCell<Enfrentamiento, String> {
 
     private ComboBox<String> comboBox;
 
-    public ComboBoxCell() {
+   /* public ComboBoxCell() {
     }
 
     @Override
@@ -75,4 +75,5 @@ public class ComboBoxCell extends TableCell<Enfrentamiento, String> {
     private String getString() {
         return getItem() == null ? "" : getItem().toString();
     }
+    */
 }
