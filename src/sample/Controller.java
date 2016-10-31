@@ -10,7 +10,7 @@ import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -21,15 +21,15 @@ import java.util.*;
 public class Controller implements Initializable {
 
     @FXML
-    private ComboBox<String> jornada;
+    private ChoiceBox<String> jornada;
     @FXML
-    private ComboBox<String> equiposEnfrentamiento;
+    private ChoiceBox<String> equiposEnfrentamiento;
     @FXML
     private CheckBox checkBoxCambios;
     @FXML
-    private ComboBox<String> l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18;
+    private ChoiceBox<String> l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,l17,l18;
     @FXML
-    private ComboBox<String> v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,v13,v14,v15,v16,v17,v18;
+    private ChoiceBox<String> v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,v13,v14,v15,v16,v17,v18;
     @FXML
     private TextField puntosLocal1,puntosLocal2,puntosLocal3,puntosLocal4,puntosLocal5,puntosLocal6,puntosLocal7,
             puntosLocal8,puntosLocal9,puntosLocal10,puntosLocal11,puntosLocal12,puntosLocal13,puntosLocal14,
@@ -57,7 +57,7 @@ public class Controller implements Initializable {
     private List<String> listaJornadas;
     private List<String> enfrentamientoJornadas;
     private Map<Integer, Enfrentamiento> mapaEnfrentamientos;
-    private List<ComboBox> listaCombosLocales, listaCombosVisitantes;
+    private List<ChoiceBox> listaCombosLocales, listaCombosVisitantes;
     private List<TextField> puntosLocal,sumaLocal,puntosVisitante,sumaVisitante;
     private Enfrentamiento actual;
 
@@ -110,14 +110,16 @@ public class Controller implements Initializable {
                 //System.out.println(mapaEnfrentamientos);
                 ArrayList<String> jl=new ArrayList<String>(mapaEnfrentamientos.get(id).getjLocales().values());
                 ArrayList<String> jv=new ArrayList<String>(mapaEnfrentamientos.get(id).getjVisitante().values());
-                limpiaCombos();
+                //limpiaCombos();
                 ObservableList<String> observableListjl= FXCollections.observableArrayList(jl);
-                for (ComboBox<String> c: listaCombosLocales) {
+                for (ChoiceBox<String> c: listaCombosLocales) {
+                 //   c.getItems().clear();
                     c.setItems(observableListjl);
                     c.valueProperty().addListener(new MiChangeListener<String>(c,jl));
                 }
                 ObservableList<String> observableListjv= FXCollections.observableArrayList(jv);
-                for (ComboBox<String> c: listaCombosVisitantes) {
+                for (ChoiceBox<String> c: listaCombosVisitantes) {
+                    c.getItems().clear();
                     c.setItems(observableListjv);
                 }
                 checkBoxCambios.selectedProperty().addListener(new ChangeListener<Boolean>() {
@@ -248,9 +250,9 @@ public class Controller implements Initializable {
 
     private void inicializarListas(){
 
-        listaCombosLocales=new ArrayList<ComboBox>(){{add(l1);add(l2);add(l3);add(l4);add(l5);add(l6);add(l7);add(l8);
+        listaCombosLocales=new ArrayList<ChoiceBox>(){{add(l1);add(l2);add(l3);add(l4);add(l5);add(l6);add(l7);add(l8);
             add(l9);add(l10);add(l11);add(l12);add(l13);add(l14);add(l15);add(l16);add(l17);add(l18);}};
-        listaCombosVisitantes=new ArrayList<ComboBox>(){{add(v1);add(v2);add(v3);add(v4);add(v5);add(v6);add(v7);
+        listaCombosVisitantes=new ArrayList<ChoiceBox>(){{add(v1);add(v2);add(v3);add(v4);add(v5);add(v6);add(v7);
             add(v8);add(v9);add(v10);add(v11);add(v12);add(v13);add(v14);add(v15);add(v16);add(v17);add(v18);}};
         puntosLocal=new ArrayList<TextField>(){{add(puntosLocal1);add(puntosLocal2);add(puntosLocal3);add(puntosLocal4);
             add(puntosLocal5);add(puntosLocal6);add(puntosLocal7);add(puntosLocal8);add(puntosLocal9);
@@ -275,9 +277,9 @@ public class Controller implements Initializable {
 
     public class MiChangeListener<String> implements ChangeListener<String>{
 
-        private  ComboBox combo ;
+        private  ChoiceBox combo ;
         private  ArrayList<String> j;
-        MiChangeListener(ComboBox combo, ArrayList<String> lista) {
+        MiChangeListener(ChoiceBox combo, ArrayList<String> lista) {
             this.combo = combo ;
             j=new ArrayList<>(lista);
             System.out.println(j);
@@ -287,36 +289,36 @@ public class Controller implements Initializable {
         @Override
         public void changed (ObservableValue < ? extends String > observable, String oldValue, String newValue){
 
-
-
-
+            System.out.println("New Value-->"+newValue);
+            System.out.println("Old Value-->"+oldValue);
             int indiceElementoSeleccionado=j.indexOf(newValue);
             if (!checkBoxCambios.isSelected()) {
                 if (combo.getId().substring(0, 1).equals("l")) {
 
 
-                    //Integer numComboBox=Integer.parseInt(combo.getId().replaceAll("\\D+",""));
-                    int numComboBox;
+                    //Integer numChoiceBox=Integer.parseInt(combo.getId().replaceAll("\\D+",""));
+                    int numChoiceBox;
                     if (combo.getId().length() == 2) {
 
-                        numComboBox = Integer.parseInt(combo.getId().substring(1, 2));
+                        numChoiceBox = Integer.parseInt(combo.getId().substring(1, 2));
 
                     } else {
 
-                        numComboBox = Integer.parseInt(combo.getId().substring(1, 3));
+                        numChoiceBox = Integer.parseInt(combo.getId().substring(1, 3));
 
                     }
-                    numComboBox--;
-                    int sw = numComboBox % 3;
+                    numChoiceBox--;
+                    int sw = numChoiceBox % 3;
                     switch (sw) {
 
                         case 0:
                             for (int i = 0; i < 18; i = i + 3) {
+                      //          System.out.println("Elemento seleccionado-->"+indiceElementoSeleccionado);
                                 listaCombosLocales.get(i).getSelectionModel().select(indiceElementoSeleccionado);
-//                                if (i > numComboBox) {
-//                                    listaCombosLocales.get(i).setDisable(true);
-//                                }
-                                //System.out.println(listaCombosLocales.get(i).getSelectionModel().getSelectedIndex());
+                                if (i > numChoiceBox) {
+                                    listaCombosLocales.get(i).setDisable(true);
+                                }
+                        //        System.out.println("Indice seleccionado"+listaCombosLocales.get(i).getSelectionModel().getSelectedIndex());
 
                             }
 
@@ -324,18 +326,18 @@ public class Controller implements Initializable {
                         case 1:
                             for (int i = 1; i < 18; i = i + 3) {
                                 listaCombosLocales.get(i).getSelectionModel().select(indiceElementoSeleccionado);
-//                                if (i > numComboBox) {
-//                                    listaCombosLocales.get(i).setDisable(true);
-//                                }
+                                if (i > numChoiceBox) {
+                                    listaCombosLocales.get(i).setDisable(true);
+                                }
 
                             }
                             break;
                         case 2:
                             for (int i = 2; i < 18; i = i + 3) {
                                 listaCombosLocales.get(i).getSelectionModel().select(indiceElementoSeleccionado);
-//                                if (i > numComboBox) {
-//                                    listaCombosLocales.get(i).setDisable(true);
-//                                }
+                                if (i > numChoiceBox) {
+                                    listaCombosLocales.get(i).setDisable(true);
+                                }
                             }
                             break;
                     }
