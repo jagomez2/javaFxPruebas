@@ -6,8 +6,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class Main extends Application {
 
+    public static final ArrayList<String> listaNumeros = new ArrayList<String>(){{
+        for (int i=0;i<=7;i++)
+        {add(((Integer)i).toString());}
+        add("10");
+    }};
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("enfrentamiento.fxml"));
