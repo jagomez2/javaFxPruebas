@@ -21,7 +21,17 @@ public class Enfrentamiento {
     Map<Integer,String> jVisitante;
     private Connection conexion;
 
-    public Enfrentamiento(int id, int jornada, String EqLocal,String EqVisitante) {
+
+    public Map<Integer, String> getjLocales() {
+        return jLocales;
+    }
+
+    public Map<Integer, String> getjVisitante() {
+        return jVisitante;
+    }
+
+
+    public Enfrentamiento(int id, int jornada, String EqLocal, String EqVisitante) {
 
 
         conectaBBDD();
@@ -31,6 +41,7 @@ public class Enfrentamiento {
         nomEquipoLocal = EqLocal;
         nomEquipoVisitante=EqVisitante;
         rellenaJugadores();
+
         System.out.println(jLocales);
         System.out.println(jVisitante);
     }
