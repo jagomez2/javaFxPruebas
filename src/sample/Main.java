@@ -18,7 +18,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("enfrentamiento.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Agpool Estadisticas Equipos");
         primaryStage.setScene(new Scene(root,  650, 760));
         primaryStage.show();
 

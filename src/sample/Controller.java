@@ -4,8 +4,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -30,21 +33,23 @@ public class Controller implements Initializable {
     @FXML
     private TextField puntosLocal1, puntosLocal2, puntosLocal3, puntosLocal4, puntosLocal5, puntosLocal6, puntosLocal7,
             puntosLocal8, puntosLocal9, puntosLocal10, puntosLocal11, puntosLocal12, puntosLocal13, puntosLocal14,
-            puntosLocal15, puntosLocal16, puntosLocal17, puntosLocal18;
+            puntosLocal15, puntosLocal16, puntosLocal17, puntosLocal18, puntosLocal19;
     @FXML
     private TextField sumaLocal1, sumaLocal2, sumaLocal3, sumaLocal4, sumaLocal5, sumaLocal6, sumaLocal7, sumaLocal8,
             sumaLocal9, sumaLocal10, sumaLocal11, sumaLocal12, sumaLocal13, sumaLocal14,
-            sumaLocal15, sumaLocal16, sumaLocal17, sumaLocal18;
+            sumaLocal15, sumaLocal16, sumaLocal17, sumaLocal18, sumaLocal19;
 
     @FXML
     private TextField puntosVisitante1, puntosVisitante2, puntosVisitante3, puntosVisitante4, puntosVisitante5, puntosVisitante6,
             puntosVisitante7, puntosVisitante8, puntosVisitante9, puntosVisitante10, puntosVisitante11, puntosVisitante12,
-            puntosVisitante13, puntosVisitante14, puntosVisitante15, puntosVisitante16, puntosVisitante17, puntosVisitante18;
+            puntosVisitante13, puntosVisitante14, puntosVisitante15, puntosVisitante16, puntosVisitante17, puntosVisitante18, puntosVisitante19;
 
     @FXML
     private TextField sumaVisitante1, sumaVisitante2, sumaVisitante3, sumaVisitante4, sumaVisitante5, sumaVisitante6, sumaVisitante7,
             sumaVisitante8, sumaVisitante9, sumaVisitante10, sumaVisitante11, sumaVisitante12, sumaVisitante13, sumaVisitante14,
-            sumaVisitante15, sumaVisitante16, sumaVisitante17, sumaVisitante18;
+            sumaVisitante15, sumaVisitante16, sumaVisitante17, sumaVisitante18, sumaVisitante19;
+    @FXML
+    private Button botonSubmit;
 
 
     private Connection conexion;
@@ -53,7 +58,11 @@ public class Controller implements Initializable {
     private Map<Integer, Enfrentamiento> mapaEnfrentamientos;
     private List<ChoiceBox> listaCombosLocales, listaCombosVisitantes;
     private List<TextField> puntosLocal, sumaLocal, puntosVisitante, sumaVisitante;
+
     private Enfrentamiento actual;
+    private ArrayList<String> datosIndividualesSubmit, datosPartidaEquipo;
+
+    private HashMap<Integer, ArrayList<String>> datosSubmit = new HashMap<Integer, ArrayList<String>>();
 
     private int numJorndaSeleccionada;
     private int numEnfrentamientoSeleccionado;
@@ -73,12 +82,12 @@ public class Controller implements Initializable {
 
         for (int i = 0; i < puntosLocal.size(); i++) {
 
-            puntosLocal.get(i).lengthProperty().addListener(new MiChangeListenerDigitos<Number>(i,true));
+            puntosLocal.get(i).lengthProperty().addListener(new MiChangeListenerDigitos<Number>(i, true));
 
         }
         for (int i = 0; i < puntosVisitante.size(); i++) {
 
-            puntosVisitante.get(i).lengthProperty().addListener(new MiChangeListenerDigitos<Number>(i,false));
+            puntosVisitante.get(i).lengthProperty().addListener(new MiChangeListenerDigitos<Number>(i, false));
 
         }
         //puntosLocal1.lengthProperty().addListener(new MiChangeListenerDigitos(0));
@@ -86,11 +95,35 @@ public class Controller implements Initializable {
 
         conectaBBDD();
 
+        botonSubmit.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                boolean correcto1, correcto2,correcto3,correcto4;
+                correcto1 = borraPartidasEnfrentamiento();
+
+                correcto2 = introducePartidasIndividualesEnBD(datosSubmit);
+                correcto3 = introducePartidasEquiposEnBD(datosPartidaEquipo);
+                correcto4 = actualizaPuntuacionEnfrentamiento();
+
+                if (correcto1 && correcto2 && correcto3 && correcto4) {
+
+                    botonSubmit.setStyle("-fx-background-color: green");
+
+                } else {
+
+                    botonSubmit.setStyle("-fx-background-color: red");
+
+
+                }
+
+            }
+        });
         jornada.setItems(inicializaComboJornadas());
         jornada.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue ov, String t, String t1) {
-                //System.out.println(t1);
+
 
                 numJorndaSeleccionada = Integer.parseInt(t1);
                 equiposEnfrentamiento.setItems(inicializaComboEquiposEnfrentamiento(t1));
@@ -100,20 +133,18 @@ public class Controller implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                //  limpiaCombos();
+                limpiaCombos();
 
                 String t[];
                 Integer id;
                 t = newValue.split(":");
                 id = Integer.parseInt(t[0].trim());
                 t = t[1].split("-");
-                //     limpiaCombos();
 
-                //System.out.println(id+"   "+t[0].trim()+"     "+t[1].trim());
 
                 mapaEnfrentamientos.put(id, new Enfrentamiento(id, numJorndaSeleccionada, t[0].trim(), t[1].trim()));
                 numEnfrentamientoSeleccionado = id;
-                //System.out.println(mapaEnfrentamientos);
+
                 ArrayList<String> jl = new ArrayList<String>(mapaEnfrentamientos.get(id).getjLocales().values());
                 ArrayList<String> jv = new ArrayList<String>(mapaEnfrentamientos.get(id).getjVisitante().values());
                 //limpiaCombos();
@@ -151,8 +182,6 @@ public class Controller implements Initializable {
             }
         });
 
-        System.out.println(numJorndaSeleccionada);
-
 
         //jornada.setPromptText("Hola");
 
@@ -185,7 +214,7 @@ public class Controller implements Initializable {
         actual.getjLocales();
         List<String> listaJlocal = new ArrayList<String>(actual.getjLocales().values());
         ObservableList<String> observableJugadoresLocales = FXCollections.observableList(listaJlocal);
-        System.out.println(listaJlocal);
+
         return observableJugadoresLocales;
     }
 
@@ -250,9 +279,13 @@ public class Controller implements Initializable {
     }
 
     private void limpiaCombos() {
-        System.out.println("Lipio");
+
         for (int i = 0; i < 18; i++) {
             listaCombosLocales.get(i).getSelectionModel().clearSelection();
+            puntosLocal.get(i).setText("");
+            puntosLocal.get(i).setStyle("-fx-control-inner-background: red");
+            puntosVisitante.get(i).setStyle("-fx-control-inner-background: red");
+            puntosVisitante.get(i).setText("");
             listaCombosVisitantes.get(i).getSelectionModel().clearSelection();
         }
 
@@ -319,6 +352,7 @@ public class Controller implements Initializable {
             add(puntosLocal16);
             add(puntosLocal17);
             add(puntosLocal18);
+            add(puntosLocal19);
         }};
         puntosVisitante = new ArrayList<TextField>() {{
             add(puntosVisitante1);
@@ -339,6 +373,7 @@ public class Controller implements Initializable {
             add(puntosVisitante16);
             add(puntosVisitante17);
             add(puntosVisitante18);
+            add(puntosVisitante19);
         }};
         sumaLocal = new ArrayList<TextField>() {{
             add(sumaLocal1);
@@ -359,6 +394,7 @@ public class Controller implements Initializable {
             add(sumaLocal16);
             add(sumaLocal17);
             add(sumaLocal18);
+            add(sumaLocal19);
         }};
         sumaVisitante = new ArrayList<TextField>() {{
             add(sumaVisitante1);
@@ -379,6 +415,7 @@ public class Controller implements Initializable {
             add(sumaVisitante16);
             add(sumaVisitante17);
             add(sumaVisitante18);
+            add(sumaVisitante19);
         }};
     }
 
@@ -391,18 +428,15 @@ public class Controller implements Initializable {
         MiChangeListener(ChoiceBox combo, ArrayList<String> lista) {
             this.combo = combo;
             j = new ArrayList<>(lista);
-            System.out.println(j);
+
 
         }
 
         @Override
         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-            System.out.println("New Value-->" + newValue);
-            System.out.println("Old Value-->" + oldValue);
             int indiceElementoSeleccionado = j.indexOf(newValue);
             if (!checkBoxCambios.isSelected()) {
-
 
 
                 //Integer numChoiceBox=Integer.parseInt(combo.getId().replaceAll("\\D+",""));
@@ -425,13 +459,12 @@ public class Controller implements Initializable {
 
                         case 0:
                             for (int i = 0; i < 18; i = i + 3) {
-                                //          System.out.println("Elemento seleccionado-->"+indiceElementoSeleccionado);
-                                // listaCombosLocales.get(i).getSelectionModel().select(indiceElementoSeleccionado);
+
                                 if (i > numChoiceBox) {
                                     listaCombosLocales.get(i).getSelectionModel().select(indiceElementoSeleccionado);
                                     listaCombosLocales.get(i).setDisable(true);
                                 }
-                                //        System.out.println("Indice seleccionado"+listaCombosLocales.get(i).getSelectionModel().getSelectedIndex());
+
 
                             }
 
@@ -477,9 +510,6 @@ public class Controller implements Initializable {
                             listaCombosVisitantes.get(16).setDisable(true);
 
 
-
-
-
                             break;
                         case 1:
 
@@ -516,7 +546,6 @@ public class Controller implements Initializable {
                     }
 
 
-
                 }
             } else {
                 //checkbox cambios selected
@@ -529,67 +558,56 @@ public class Controller implements Initializable {
     public class MiChangeListenerDigitos<Integer> implements ChangeListener<Integer> {
 
         private int numTextField;
-        private boolean local=false;
+        private boolean local = false;
 
 
-        MiChangeListenerDigitos(int numTextField,boolean local) {
+        MiChangeListenerDigitos(int numTextField, boolean local) {
 
             this.numTextField = numTextField;
-            this.local= local;
+            this.local = local;
         }
 
         @Override
         public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+            java.lang.Integer suma = 0;
+            if (local) {
 
-          /*  if (newValue > oldValue.intValue()) {
-                char ch = tf.getText().charAt(oldValue.intValue());
-                // Check if the new character is the number or other's
-                if (!(ch >= '0' && ch <= '9' )) {
-                    // if it's not number then just setText to previous one
-                    tf.setText(tf.getText().substring(0,tf.getText().length()-1));
-                }
-
-
-          }
-*/          java.lang.Integer suma=0;
-           // System.out.println( java.lang.Integer.parseInt(puntosLocal.get(numTextField).getText()));
-            if (local){
-
-                if (Main.listaNumeros.contains(puntosLocal.get(numTextField).getText())){
+                if (Main.listaNumeros.contains(puntosLocal.get(numTextField).getText())) {
 
                     puntosLocal.get(numTextField).setStyle("-fx-control-inner-background: green");
-                    for (int i=0;i<=numTextField;i++){
+                    for (int i = 0; i < 19; i++) {
                         if (puntosLocal.get(i).getText() != null && !puntosLocal.get(i).getText().isEmpty()) {
                             suma += java.lang.Integer.parseInt(puntosLocal.get(i).getText());
-                            //System.out.println(suma);
-                        }
-                    }
-                    sumaLocal.get(numTextField).setText(suma.toString());
 
-                }
-                else{
+                            sumaLocal.get(i).setText(suma.toString());
+
+                        }
+
+                    }
+
+
+                } else {
 
                     puntosLocal.get(numTextField).setStyle("-fx-control-inner-background: red");
 
                 }
-            }
+            } else {               //visitante
 
-            else{               //visitante
-
-                if (Main.listaNumeros.contains(puntosVisitante.get(numTextField).getText())){
+                if (Main.listaNumeros.contains(puntosVisitante.get(numTextField).getText())) {
 
                     puntosVisitante.get(numTextField).setStyle("-fx-control-inner-background: green");
-                    for (int i=0;i<=numTextField;i++){
+                    for (int i = 0; i < 19; i++) {
                         if (puntosVisitante.get(i).getText() != null && !puntosVisitante.get(i).getText().isEmpty()) {
                             suma += java.lang.Integer.parseInt(puntosVisitante.get(i).getText());
-                           // System.out.println(suma);
+
+                            sumaVisitante.get(i).setText(suma.toString());
                         }
+
+
                     }
-                    sumaVisitante.get(numTextField).setText(suma.toString());
 
 
-                }
-                else{
+                } else {
 
                     puntosVisitante.get(numTextField).setStyle("-fx-control-inner-background: red");
 
@@ -598,47 +616,226 @@ public class Controller implements Initializable {
 
             }
 
-        for (int i=0;i<18;i++){
+            for (int i = 0; i < 18; i++) {
 
-           if(puntosLocal.get(i).getText() != null && !puntosLocal.get(i).getText().isEmpty() &&
-                   puntosVisitante.get(i).getText() != null && !puntosVisitante.get(i).getText().isEmpty()){
+                if (puntosLocal.get(i).getText() != null && !puntosLocal.get(i).getText().isEmpty() &&
+                        puntosVisitante.get(i).getText() != null && !puntosVisitante.get(i).getText().isEmpty()) {
 
-               if ((!puntosLocal.get(i).getText().equals("10") && !puntosVisitante.get(i).getText().equals("10")) ||
-                       ((java.lang.Integer.parseInt(puntosLocal.get(i).getText()))+(java.lang.Integer.parseInt(puntosVisitante.get(i).getText())))>17 ||
-                            ((java.lang.Integer.parseInt(puntosLocal.get(i).getText()))+(java.lang.Integer.parseInt(puntosVisitante.get(i).getText())))<10){
-                   System.out.println("Entrando sin querer");
-                   System.out.println(numTextField);
-                   System.out.println(puntosLocal.get(i).getText());
-                   System.out.println(puntosVisitante.get(i).getText());
-                   System.out.println(puntosLocal.get(i).getText().equals("10"));
-                   System.out.println(puntosVisitante.get(i).getText().equals("10"));
-                   System.out.println((java.lang.Integer.parseInt(puntosLocal.get(i).getText()))+(java.lang.Integer.parseInt(puntosVisitante.get(i).getText())));
-                   puntosLocal.get(i).setStyle("-fx-control-inner-background: red");
-                   puntosVisitante.get(i).setStyle("-fx-control-inner-background: red");
+                    if ((!puntosLocal.get(i).getText().equals("10") && !puntosVisitante.get(i).getText().equals("10")) ||
+                            ((java.lang.Integer.parseInt(puntosLocal.get(i).getText())) + (java.lang.Integer.parseInt(puntosVisitante.get(i).getText()))) > 17 ||
+                            ((java.lang.Integer.parseInt(puntosLocal.get(i).getText())) + (java.lang.Integer.parseInt(puntosVisitante.get(i).getText()))) < 10 ||
+                            listaCombosLocales.get(i).getSelectionModel().getSelectedIndex() == -1 ||
+                            listaCombosVisitantes.get(i).getSelectionModel().getSelectedIndex() == -1) {
+
+                        puntosLocal.get(i).setStyle("-fx-control-inner-background: red");
+                        puntosVisitante.get(i).setStyle("-fx-control-inner-background: red");
 
 
-               }
-               else{
+                    } else {
 
-                   System.out.println(numTextField);
-                   System.out.println("Entrando --->>>");
-                   System.out.println(puntosLocal.get(i).getText());
-                   System.out.println(puntosVisitante.get(i).getText());
-                   System.out.println(puntosLocal.get(i).getText().equals("10"));
-                   System.out.println(puntosVisitante.get(i).getText().equals("10"));
-                   System.out.println((java.lang.Integer.parseInt(puntosLocal.get(i).getText()))+(java.lang.Integer.parseInt(puntosVisitante.get(i).getText())));
-                   puntosLocal.get(i).setStyle("-fx-control-inner-background: green");
-                   puntosVisitante.get(i).setStyle("-fx-control-inner-background: green");
-               }
+                        datosIndividualesSubmit = new ArrayList<String>();
+                        puntosLocal.get(i).setStyle("-fx-control-inner-background: green");
+                        puntosVisitante.get(i).setStyle("-fx-control-inner-background: green");
 
-           }
+                        //Enfrentamiento -->[0]
+                        datosIndividualesSubmit.add(((java.lang.Integer) numEnfrentamientoSeleccionado).toString());
 
+                        //Bloques 1,3,5
+                        if ((i < 3) || ((i > 5) && (i < 9)) || ((i > 11) && (i < 15))) {
+                            //JugadorSaque   -->[1]
+                            datosIndividualesSubmit.add((mapaEnfrentamientos.get(numEnfrentamientoSeleccionado).
+                                    getIdJugador(listaCombosVisitantes.get(i).getSelectionModel().getSelectedItem().toString())).toString());
+                            //JugadorSinSaque-->[2]
+                            datosIndividualesSubmit.add((mapaEnfrentamientos.get(numEnfrentamientoSeleccionado).
+                                    getIdJugador(listaCombosLocales.get(i).getSelectionModel().getSelectedItem().toString())).toString());
+
+                            if (puntosLocal.get(i).getText().equals("10")) {
+                                datosIndividualesSubmit.add("0");
+                            } else {
+                                datosIndividualesSubmit.add("1");
+                            }
+                            datosIndividualesSubmit.add(puntosVisitante.get(i).getText());
+                            //ResultadoJugadorSinSaque-->[4]
+                            datosIndividualesSubmit.add(puntosLocal.get(i).getText());
+                        }
+                        //Bloques 2,4,6
+                        else {
+                            //JugadorSaque   -->[1]
+                            datosIndividualesSubmit.add((mapaEnfrentamientos.get(numEnfrentamientoSeleccionado).
+                                    getIdJugador(listaCombosLocales.get(i).getSelectionModel().getSelectedItem().toString())).toString());
+                            //JugadorSinSaque-->[2]
+                            datosIndividualesSubmit.add((mapaEnfrentamientos.get(numEnfrentamientoSeleccionado).
+                                    getIdJugador(listaCombosVisitantes.get(i).getSelectionModel().getSelectedItem().toString())).toString());
+                            if (puntosLocal.get(i).getText().equals("10")) {
+                                datosIndividualesSubmit.add("0");
+                            } else {
+                                datosIndividualesSubmit.add("1");
+                            }
+                            datosIndividualesSubmit.add(puntosLocal.get(i).getText());
+                            //ResultadoJugadorSinSaque-->[4]
+                            datosIndividualesSubmit.add(puntosVisitante.get(i).getText());
+
+                        }
+
+                        //Victoria-->[3]:0=Local 1=Visitante
+
+                        //ResultadoJugadorSaque-->[4]
+
+
+                        datosSubmit.remove(i);
+                        datosSubmit.put(i, datosIndividualesSubmit);
+
+
+                    }
+
+                }
+
+            }
+            if (puntosLocal.get(18).getText() != null && !puntosLocal.get(18).getText().isEmpty() &&
+                    puntosVisitante.get(18).getText() != null && !puntosVisitante.get(18).getText().isEmpty()) {
+
+                if ((!puntosLocal.get(18).getText().equals("10") && !puntosVisitante.get(18).getText().equals("10")) ||
+                        ((java.lang.Integer.parseInt(puntosLocal.get(18).getText())) + (java.lang.Integer.parseInt(puntosVisitante.get(18).getText()))) > 17 ||
+                        ((java.lang.Integer.parseInt(puntosLocal.get(18).getText())) + (java.lang.Integer.parseInt(puntosVisitante.get(18).getText()))) < 10) {
+                    puntosLocal.get(18).setStyle("-fx-control-inner-background: red");
+                    puntosVisitante.get(18).setStyle("-fx-control-inner-background: red");
+
+
+                } else {
+
+
+                    puntosLocal.get(18).setStyle("-fx-control-inner-background: green");
+                    puntosVisitante.get(18).setStyle("-fx-control-inner-background: green");
+
+                    datosPartidaEquipo = new ArrayList<String>();
+                    datosPartidaEquipo.add(((java.lang.Integer) numEnfrentamientoSeleccionado).toString());
+                    if (puntosLocal.get(18).getText().equals("10")) {
+                        datosPartidaEquipo.add("0");
+                    } else {
+                        datosPartidaEquipo.add("1");
+                    }
+                    datosPartidaEquipo.add(puntosLocal.get(18).getText());
+                    datosPartidaEquipo.add(puntosVisitante.get(18).getText());
+
+
+                }
+            }
+
+
+            int i = 0;
+            botonSubmit.setDisable(true);
+            while (((i < 19) && puntosLocal.get(i).getStyle().equals("-fx-control-inner-background: green")) &&
+                    (puntosVisitante.get(i).getStyle().equals("-fx-control-inner-background: green"))) {
+
+                if (i == 18) {
+                    botonSubmit.setDisable(false);
+                }
+
+                i++;
+            }
         }
-
-        }
-
 
 
     }
+
+    public boolean introducePartidasIndividualesEnBD(HashMap<Integer, ArrayList<String>> datos) {
+
+        try {
+            PreparedStatement sentencia = conexion.prepareStatement("INSERT INTO PartidaIndividual (Enfrentamiento,JugadorSaque,JugadorSinSaque," +
+                    "Victoria,ResultadoJugadorSaque,ResultadoJugadorSinSaque) VALUES (?,?,?,?,?,?)");
+
+            for (ArrayList<String> arraylist : datos.values()) {
+
+                sentencia.setInt(1, Integer.parseInt(arraylist.get(0)));
+                sentencia.setInt(2, Integer.parseInt(arraylist.get(1)));
+                sentencia.setInt(3, Integer.parseInt(arraylist.get(2)));
+                sentencia.setInt(4, Integer.parseInt(arraylist.get(3)));
+                sentencia.setInt(5, Integer.parseInt(arraylist.get(4)));
+                sentencia.setInt(6, Integer.parseInt(arraylist.get(5)));
+
+                sentencia.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+
+        return true;
+    }
+
+    public boolean introducePartidasEquiposEnBD(ArrayList<String> datos) {
+
+        try {
+            PreparedStatement sentencia = conexion.prepareStatement("INSERT INTO PartidaEquipos (Enfrentamiento," +
+                    "Victoria,ResultadoEquipoLocal,ResultadoEquipoVisitante) VALUES (?,?,?,?)");
+
+
+            sentencia.setInt(1, Integer.parseInt(datos.get(0)));
+            sentencia.setInt(2, Integer.parseInt(datos.get(1)));
+            sentencia.setInt(3, Integer.parseInt(datos.get(2)));
+            sentencia.setInt(4, Integer.parseInt(datos.get(3)));
+
+            sentencia.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+
+        return true;
+    }
+
+
+    public boolean actualizaPuntuacionEnfrentamiento() {
+
+
+        try {
+
+            PreparedStatement sentencia = conexion.prepareStatement("Update Enfrentamiento set ResultadoLocal=?,ResultadoVisitante=? where idEnfrentamiento=?");
+
+            sentencia.setInt(1, Integer.parseInt(sumaLocal19.getText()));
+            sentencia.setInt(2, Integer.parseInt(sumaVisitante19.getText()));
+            sentencia.setInt(3, numEnfrentamientoSeleccionado);
+
+            sentencia.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+
+        return true;
+    }
+
+    public boolean borraPartidasEnfrentamiento() {
+
+
+        try {
+
+            PreparedStatement sentencia1 = conexion.prepareStatement("Delete from PartidaIndividual where Enfrentamiento=?");
+            PreparedStatement sentencia2 = conexion.prepareStatement("Delete from PartidaEquipos where Enfrentamiento=?");
+
+            sentencia1.setInt(1, numEnfrentamientoSeleccionado);
+            sentencia2.setInt(1, numEnfrentamientoSeleccionado);
+
+            sentencia1.executeUpdate();
+            sentencia2.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+
+        return true;
+    }
+
 
 }

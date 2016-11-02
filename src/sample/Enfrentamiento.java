@@ -1,10 +1,7 @@
 package sample;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by jag on 27/10/16.
@@ -59,6 +56,31 @@ public class Enfrentamiento {
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
+    }
+
+    public Integer getIdJugador(String nombre){
+
+        Integer id=-1;
+        Iterator it = getjLocales().keySet().iterator();
+        while (it.hasNext() && (id==-1)){
+
+            Integer temp=(Integer) it.next();
+            if (getjLocales().get(temp).equals(nombre)){
+
+                id=temp;
+            }
+        }
+        it = getjVisitante().keySet().iterator();
+        while (it.hasNext() && (id==-1)){
+
+            Integer temp=(Integer) it.next();
+            if (getjVisitante().get(temp).equals(nombre)){
+
+                id=temp;
+            }
+        }
+        return id;
+
     }
 
 
