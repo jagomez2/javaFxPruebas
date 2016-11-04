@@ -12,7 +12,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.sql.*;
 import java.util.*;
@@ -25,7 +30,7 @@ public class Controller implements Initializable {
     @FXML
     private ChoiceBox<String> equiposEnfrentamiento;
     @FXML
-    private CheckBox checkBoxCambios;
+    private CheckBox checkBoxCambios, checkBoxTextoBD;
     @FXML
     private ChoiceBox<String> l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, l18;
     @FXML
@@ -66,6 +71,7 @@ public class Controller implements Initializable {
 
     private int numJorndaSeleccionada;
     private int numEnfrentamientoSeleccionado;
+    private String nombreJornada;
 
 
     @Override
@@ -99,21 +105,30 @@ public class Controller implements Initializable {
 
             @Override
             public void handle(ActionEvent e) {
-                boolean correcto1, correcto2,correcto3,correcto4;
-                correcto1 = borraPartidasEnfrentamiento();
 
-                correcto2 = introducePartidasIndividualesEnBD(datosSubmit);
-                correcto3 = introducePartidasEquiposEnBD(datosPartidaEquipo);
-                correcto4 = actualizaPuntuacionEnfrentamiento();
+                if (!checkBoxTextoBD.isSelected()) {
+                    boolean correcto1, correcto2, correcto3, correcto4;
+                    correcto1 = borraPartidasEnfrentamiento();
 
-                if (correcto1 && correcto2 && correcto3 && correcto4) {
+                    correcto2 = introducePartidasIndividualesEnBD(datosSubmit);
+                    correcto3 = introducePartidasEquiposEnBD(datosPartidaEquipo);
+                    correcto4 = actualizaPuntuacionEnfrentamiento();
 
-                    botonSubmit.setStyle("-fx-background-color: green");
+                    if (correcto1 && correcto2 && correcto3 && correcto4) {
+
+                        botonSubmit.setStyle("-fx-background-color: green");
+
+                    } else {
+
+                        botonSubmit.setStyle("-fx-background-color: red");
+
+
+                    }
 
                 } else {
 
-                    botonSubmit.setStyle("-fx-background-color: red");
 
+                    imprimePartidasEnFicheroDeTexto(nombreJornada);
 
                 }
 
@@ -137,7 +152,9 @@ public class Controller implements Initializable {
 
                 String t[];
                 Integer id;
+                //     System.out.println("Valor nuevo "+ newValue);
                 t = newValue.split(":");
+                nombreJornada=t[1];
                 id = Integer.parseInt(t[0].trim());
                 t = t[1].split("-");
 
@@ -147,45 +164,51 @@ public class Controller implements Initializable {
 
                 ArrayList<String> jl = new ArrayList<String>(mapaEnfrentamientos.get(id).getjLocales().values());
                 ArrayList<String> jv = new ArrayList<String>(mapaEnfrentamientos.get(id).getjVisitante().values());
+
+                //System.out.println(jl);
+                //System.out.println(jv);
+
+
                 //limpiaCombos();
                 ObservableList<String> observableListjl = FXCollections.observableArrayList(jl);
                 for (ChoiceBox<String> c : listaCombosLocales) {
-                    //   c.getItems().clear();
+
+                    c.getItems().clear();
                     c.setItems(observableListjl);
                     c.valueProperty().addListener(new MiChangeListener<String>(c, jl));
+
                 }
+
                 ObservableList<String> observableListjv = FXCollections.observableArrayList(jv);
-                for (ChoiceBox<String> c : listaCombosVisitantes) {
-                    //   c.getItems().clear();
-                    c.setItems(observableListjv);
-                    c.valueProperty().addListener(new MiChangeListener<String>(c, jv));
+                for (ChoiceBox<String> d : listaCombosVisitantes) {
+
+                    d.getItems().clear();
+                    //d.valueProperty().removeListener(new MiChangeListener<String>(d, jv));
+                    d.setItems(observableListjv);
+                    d.valueProperty().addListener(new MiChangeListener<String>(d, jv));
                 }
-                checkBoxCambios.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                    public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
-                        if (old_val == false && new_val == true) {
-                            for (int i = 0; i < 18; i++) {
+            }
 
-                                listaCombosLocales.get(i).setDisable(false);
-                                listaCombosVisitantes.get(i).setDisable(false);
-                            }
-                        } else {
-                            for (int i = 3; i < 18; i++) {
-                                listaCombosLocales.get(i).setDisable(true);
-                                listaCombosVisitantes.get(i).setDisable(true);
-                            }
-                        }
+        });
 
+        checkBoxCambios.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
+                if (old_val == false && new_val == true) {
+                    for (int i = 3; i < 18; i++) {
+
+                        listaCombosLocales.get(i).setDisable(false);
+                        listaCombosVisitantes.get(i).setDisable(false);
                     }
-                });
-                //l1.getSelectionModel().select(2);
-                //l1.valueProperty().addListener(new MiChangeListener<String>(l1,jl));
+                } else {
+                    for (int i = 3; i < 18; i++) {
+                        listaCombosLocales.get(i).setDisable(true);
+                        listaCombosVisitantes.get(i).setDisable(true);
+                    }
+                }
+
             }
         });
 
-
-        //jornada.setPromptText("Hola");
-
-        // equiposEnfrentamiento;
     }
 
     private ObservableList<String> inicializaComboJornadas() {
@@ -282,11 +305,18 @@ public class Controller implements Initializable {
 
         for (int i = 0; i < 18; i++) {
             listaCombosLocales.get(i).getSelectionModel().clearSelection();
+            //  listaCombosLocales.get(i).valueProperty().addListener(new MiChangeListener(listaCombosLocales.get(i),null));
+
+            listaCombosVisitantes.get(i).getSelectionModel().clearSelection();
+            //  listaCombosVisitantes.get(i).valueProperty().addListener(new MiChangeListener(listaCombosVisitantes.get(i),null));
             puntosLocal.get(i).setText("");
             puntosLocal.get(i).setStyle("-fx-control-inner-background: red");
-            puntosVisitante.get(i).setStyle("-fx-control-inner-background: red");
             puntosVisitante.get(i).setText("");
-            listaCombosVisitantes.get(i).getSelectionModel().clearSelection();
+            puntosVisitante.get(i).setStyle("-fx-control-inner-background: red");
+            sumaLocal.get(i).setText("");
+            sumaVisitante.get(i).setText("");
+
+
         }
 
     }
@@ -419,6 +449,160 @@ public class Controller implements Initializable {
         }};
     }
 
+    public void imprimePartidasEnFicheroDeTexto(String nombreArchivo) {
+
+
+        URL location = Main.class.getProtectionDomain().getCodeSource().getLocation();
+        File archivo = new File("/home/jag/"+nombreArchivo);
+        try {
+
+            if (archivo.createNewFile()){
+                System.out.println("File is created!");
+
+
+            }else{
+                System.out.println("File already exists.");
+            }
+
+
+            PrintWriter writer = new PrintWriter(archivo);
+        datosSubmit.forEach((k, v) -> {
+
+            try {
+
+
+                for (int i = 0; i < (v.size() - 1); i++) {
+                    writer.print(v.get(i) + ",");     System.out.print(v.get(i)+",");
+                }
+                writer.print(v.get(v.size() - 1));
+
+                writer.print("\n");
+
+
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+
+            }
+
+
+
+        });
+            for (int i=0;i<(datosPartidaEquipo.size()-1);i++)
+            {
+                writer.print(datosPartidaEquipo.get(i) + ",");
+
+            }
+            writer.print(datosPartidaEquipo.get(datosPartidaEquipo.size() - 1));
+            writer.close();
+        }
+        catch (Exception e) {
+
+            e.printStackTrace();
+
+        };
+
+
+    }
+
+    public boolean introducePartidasIndividualesEnBD(HashMap<Integer, ArrayList<String>> datos) {
+
+        try {
+            PreparedStatement sentencia = conexion.prepareStatement("INSERT INTO PartidaIndividual (Enfrentamiento,JugadorSaque,JugadorSinSaque," +
+                    "Victoria,ResultadoJugadorSaque,ResultadoJugadorSinSaque) VALUES (?,?,?,?,?,?)");
+
+            for (ArrayList<String> arraylist : datos.values()) {
+
+                sentencia.setInt(1, Integer.parseInt(arraylist.get(0)));
+                sentencia.setInt(2, Integer.parseInt(arraylist.get(1)));
+                sentencia.setInt(3, Integer.parseInt(arraylist.get(2)));
+                sentencia.setInt(4, Integer.parseInt(arraylist.get(3)));
+                sentencia.setInt(5, Integer.parseInt(arraylist.get(4)));
+                sentencia.setInt(6, Integer.parseInt(arraylist.get(5)));
+
+                sentencia.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+
+        return true;
+    }
+
+    public boolean introducePartidasEquiposEnBD(ArrayList<String> datos) {
+
+        try {
+            PreparedStatement sentencia = conexion.prepareStatement("INSERT INTO PartidaEquipos (Enfrentamiento," +
+                    "Victoria,ResultadoEquipoLocal,ResultadoEquipoVisitante) VALUES (?,?,?,?)");
+
+
+            sentencia.setInt(1, Integer.parseInt(datos.get(0)));
+            sentencia.setInt(2, Integer.parseInt(datos.get(1)));
+            sentencia.setInt(3, Integer.parseInt(datos.get(2)));
+            sentencia.setInt(4, Integer.parseInt(datos.get(3)));
+
+            sentencia.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+
+        return true;
+    }
+
+    public boolean actualizaPuntuacionEnfrentamiento() {
+
+
+        try {
+
+            PreparedStatement sentencia = conexion.prepareStatement("Update Enfrentamiento set ResultadoLocal=?,ResultadoVisitante=? where idEnfrentamiento=?");
+
+            sentencia.setInt(1, Integer.parseInt(sumaLocal19.getText()));
+            sentencia.setInt(2, Integer.parseInt(sumaVisitante19.getText()));
+            sentencia.setInt(3, numEnfrentamientoSeleccionado);
+
+            sentencia.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+
+        return true;
+    }
+
+    public boolean borraPartidasEnfrentamiento() {
+
+
+        try {
+
+            PreparedStatement sentencia1 = conexion.prepareStatement("Delete from PartidaIndividual where Enfrentamiento=?");
+            PreparedStatement sentencia2 = conexion.prepareStatement("Delete from PartidaEquipos where Enfrentamiento=?");
+
+            sentencia1.setInt(1, numEnfrentamientoSeleccionado);
+            sentencia2.setInt(1, numEnfrentamientoSeleccionado);
+
+            sentencia1.executeUpdate();
+            sentencia2.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+
+        return true;
+    }
 
     public class MiChangeListener<String> implements ChangeListener<String> {
 
@@ -426,132 +610,142 @@ public class Controller implements Initializable {
         private ArrayList<String> j;
 
         MiChangeListener(ChoiceBox combo, ArrayList<String> lista) {
+
             this.combo = combo;
             j = new ArrayList<>(lista);
-
+          //  System.out.println("constructor: " + j);
 
         }
 
         @Override
         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
+
+           // System.out.println("Nuevo elemento: " + newValue);
+           // System.out.println(j);
+
+
             int indiceElementoSeleccionado = j.indexOf(newValue);
-            if (!checkBoxCambios.isSelected()) {
+            //int indiceElementoSeleccionado = j.indexOf(newValue);
+
+            if (indiceElementoSeleccionado!=-1) {
+                if (!checkBoxCambios.isSelected()) {
 
 
-                //Integer numChoiceBox=Integer.parseInt(combo.getId().replaceAll("\\D+",""));
-                int numChoiceBox;
-                if (combo.getId().length() == 2) {
+                    int numChoiceBox;
+                    if (combo.getId().length() == 2) {
 
-                    numChoiceBox = Integer.parseInt(combo.getId().substring(1, 2));
+                        numChoiceBox = Integer.parseInt(combo.getId().substring(1, 2));
 
-                } else {
+                    } else {
 
-                    numChoiceBox = Integer.parseInt(combo.getId().substring(1, 3));
+                        numChoiceBox = Integer.parseInt(combo.getId().substring(1, 3));
 
-                }
-                numChoiceBox--;
-
-                if (combo.getId().substring(0, 1).equals("l")) {
-
-                    int sw = numChoiceBox % 3;
-                    switch (sw) {
-
-                        case 0:
-                            for (int i = 0; i < 18; i = i + 3) {
-
-                                if (i > numChoiceBox) {
-                                    listaCombosLocales.get(i).getSelectionModel().select(indiceElementoSeleccionado);
-                                    listaCombosLocales.get(i).setDisable(true);
-                                }
-
-
-                            }
-
-                            break;
-                        case 1:
-                            for (int i = 1; i < 18; i = i + 3) {
-
-                                if (i > numChoiceBox) {
-                                    listaCombosLocales.get(i).getSelectionModel().select(indiceElementoSeleccionado);
-                                    listaCombosLocales.get(i).setDisable(true);
-                                }
-
-                            }
-                            break;
-                        case 2:
-                            for (int i = 2; i < 18; i = i + 3) {
-
-                                if (i > numChoiceBox) {
-                                    listaCombosLocales.get(i).getSelectionModel().select(indiceElementoSeleccionado);
-                                    listaCombosLocales.get(i).setDisable(true);
-                                }
-                            }
-                            break;
                     }
+                    numChoiceBox--;
+                    //System.out.println("Choicebox numero: " + numChoiceBox);
+                    if (combo.getId().substring(0, 1).equals("l")) {
 
 
-                } else {
+                        int sw = numChoiceBox % 3;
+                        switch (sw) {
 
-                    switch (numChoiceBox) {
+                            case 0:
+                                for (int i = 0; i < 18; i = i + 3) {
 
-                        case 0:
+                                    if (i > numChoiceBox) {
+                                        listaCombosLocales.get(i).getSelectionModel().select(indiceElementoSeleccionado);
+                                        listaCombosLocales.get(i).setDisable(true);
+                                    }
 
-                            listaCombosVisitantes.get(0).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(5).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(5).setDisable(true);
-                            listaCombosVisitantes.get(7).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(7).setDisable(true);
-                            listaCombosVisitantes.get(9).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(9).setDisable(true);
-                            listaCombosVisitantes.get(14).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(14).setDisable(true);
-                            listaCombosVisitantes.get(16).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(16).setDisable(true);
+                                }
 
+                                break;
+                            case 1:
+                                for (int i = 1; i < 18; i = i + 3) {
 
-                            break;
-                        case 1:
+                                    if (i > numChoiceBox) {
+                                        listaCombosLocales.get(i).getSelectionModel().select(indiceElementoSeleccionado);
+                                        listaCombosLocales.get(i).setDisable(true);
+                                    }
 
-                            listaCombosVisitantes.get(1).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(3).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(3).setDisable(true);
-                            listaCombosVisitantes.get(8).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(8).setDisable(true);
-                            listaCombosVisitantes.get(10).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(10).setDisable(true);
-                            listaCombosVisitantes.get(12).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(12).setDisable(true);
-                            listaCombosVisitantes.get(17).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(17).setDisable(true);
+                                }
+                                break;
+                            case 2:
+                                for (int i = 2; i < 18; i = i + 3) {
 
-
-                            break;
-                        case 2:
-
-                            listaCombosVisitantes.get(2).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(4).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(4).setDisable(true);
-                            listaCombosVisitantes.get(6).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(6).setDisable(true);
-                            listaCombosVisitantes.get(11).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(11).setDisable(true);
-                            listaCombosVisitantes.get(13).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(13).setDisable(true);
-                            listaCombosVisitantes.get(15).getSelectionModel().select(indiceElementoSeleccionado);
-                            listaCombosVisitantes.get(15).setDisable(true);
+                                    if (i > numChoiceBox) {
+                                        listaCombosLocales.get(i).getSelectionModel().select(indiceElementoSeleccionado);
+                                        listaCombosLocales.get(i).setDisable(true);
+                                    }
+                                }
+                                break;
+                        }
 
 
-                            break;
+                    } else {
+
+
+                        switch (numChoiceBox) {
+
+                            case 0:
+
+                                listaCombosVisitantes.get(0).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(5).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(5).setDisable(true);
+                                listaCombosVisitantes.get(7).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(7).setDisable(true);
+                                listaCombosVisitantes.get(9).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(9).setDisable(true);
+                                listaCombosVisitantes.get(14).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(14).setDisable(true);
+                                listaCombosVisitantes.get(16).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(16).setDisable(true);
+
+
+                                break;
+                            case 1:
+
+                                listaCombosVisitantes.get(1).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(3).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(3).setDisable(true);
+                                listaCombosVisitantes.get(8).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(8).setDisable(true);
+                                listaCombosVisitantes.get(10).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(10).setDisable(true);
+                                listaCombosVisitantes.get(12).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(12).setDisable(true);
+                                listaCombosVisitantes.get(17).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(17).setDisable(true);
+
+
+                                break;
+                            case 2:
+
+                                listaCombosVisitantes.get(2).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(4).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(4).setDisable(true);
+                                listaCombosVisitantes.get(6).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(6).setDisable(true);
+                                listaCombosVisitantes.get(11).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(11).setDisable(true);
+                                listaCombosVisitantes.get(13).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(13).setDisable(true);
+                                listaCombosVisitantes.get(15).getSelectionModel().select(indiceElementoSeleccionado);
+                                listaCombosVisitantes.get(15).setDisable(true);
+
+
+                                break;
+                        }
+
+
                     }
-
-
+                } else {
+                    //checkbox cambios selected
                 }
-            } else {
-                //checkbox cambios selected
+
+
             }
-
-
         }
     }
 
@@ -736,105 +930,6 @@ public class Controller implements Initializable {
         }
 
 
-    }
-
-    public boolean introducePartidasIndividualesEnBD(HashMap<Integer, ArrayList<String>> datos) {
-
-        try {
-            PreparedStatement sentencia = conexion.prepareStatement("INSERT INTO PartidaIndividual (Enfrentamiento,JugadorSaque,JugadorSinSaque," +
-                    "Victoria,ResultadoJugadorSaque,ResultadoJugadorSinSaque) VALUES (?,?,?,?,?,?)");
-
-            for (ArrayList<String> arraylist : datos.values()) {
-
-                sentencia.setInt(1, Integer.parseInt(arraylist.get(0)));
-                sentencia.setInt(2, Integer.parseInt(arraylist.get(1)));
-                sentencia.setInt(3, Integer.parseInt(arraylist.get(2)));
-                sentencia.setInt(4, Integer.parseInt(arraylist.get(3)));
-                sentencia.setInt(5, Integer.parseInt(arraylist.get(4)));
-                sentencia.setInt(6, Integer.parseInt(arraylist.get(5)));
-
-                sentencia.executeUpdate();
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-
-        return true;
-    }
-
-    public boolean introducePartidasEquiposEnBD(ArrayList<String> datos) {
-
-        try {
-            PreparedStatement sentencia = conexion.prepareStatement("INSERT INTO PartidaEquipos (Enfrentamiento," +
-                    "Victoria,ResultadoEquipoLocal,ResultadoEquipoVisitante) VALUES (?,?,?,?)");
-
-
-            sentencia.setInt(1, Integer.parseInt(datos.get(0)));
-            sentencia.setInt(2, Integer.parseInt(datos.get(1)));
-            sentencia.setInt(3, Integer.parseInt(datos.get(2)));
-            sentencia.setInt(4, Integer.parseInt(datos.get(3)));
-
-            sentencia.executeUpdate();
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-
-        return true;
-    }
-
-
-    public boolean actualizaPuntuacionEnfrentamiento() {
-
-
-        try {
-
-            PreparedStatement sentencia = conexion.prepareStatement("Update Enfrentamiento set ResultadoLocal=?,ResultadoVisitante=? where idEnfrentamiento=?");
-
-            sentencia.setInt(1, Integer.parseInt(sumaLocal19.getText()));
-            sentencia.setInt(2, Integer.parseInt(sumaVisitante19.getText()));
-            sentencia.setInt(3, numEnfrentamientoSeleccionado);
-
-            sentencia.executeUpdate();
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-
-        return true;
-    }
-
-    public boolean borraPartidasEnfrentamiento() {
-
-
-        try {
-
-            PreparedStatement sentencia1 = conexion.prepareStatement("Delete from PartidaIndividual where Enfrentamiento=?");
-            PreparedStatement sentencia2 = conexion.prepareStatement("Delete from PartidaEquipos where Enfrentamiento=?");
-
-            sentencia1.setInt(1, numEnfrentamientoSeleccionado);
-            sentencia2.setInt(1, numEnfrentamientoSeleccionado);
-
-            sentencia1.executeUpdate();
-            sentencia2.executeUpdate();
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-
-        return true;
     }
 
 
