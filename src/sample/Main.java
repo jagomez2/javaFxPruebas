@@ -1,11 +1,18 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main extends Application {
@@ -17,11 +24,63 @@ public class Main extends Application {
     }};
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("enfrentamiento.fxml"));
-        primaryStage.setTitle("Agpool Estadisticas Equipos");
-        primaryStage.setScene(new Scene(root,  650, 760));
+
+
+       // Parent root = FXMLLoader.load(getClass().getResource("enfrentamiento.fxml"));
+
+        Button btn = new Button();
+       // btn.setLayoutX(225);
+       // btn.setLayoutY(225);
+        btn.setText("Introduce nuevos enfrentamientos");
+        btn.setOnAction((ActionEvent event) -> {
+            //Label secondLabel = new Label("Hello");
+
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("enfrentamiento.fxml"));
+                Parent root1 = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root1, 650, 760));
+                stage.show();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+
+
+        });
+
+        Button btn2 = new Button();
+      //  btn2.setLayoutX(375);
+      //  btn2.setLayoutY(375);
+        btn2.setText("Visualiza enfrentamientos");
+        btn2.setOnAction((ActionEvent event) -> {
+            //Label secondLabel = new Label("Hello");
+
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("visualiza_enfrentamiento.fxml"));
+                Parent root1 = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root1, 650, 760));
+                stage.show();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+
+
+        });
+
+        GridPane root = new GridPane();
+        root.setPadding(new Insets(10, 10, 10, 10));
+        root.add(btn, 0, 0);
+        root.add(btn2, 0, 1);
+
+
+        //root.getChildren().add(btn);
+        //root.getChildren().add(btn2);
+        primaryStage.setTitle("Agpool gestion liga de equipos @BY_JAG");
+        primaryStage.setScene(new Scene(root,  550, 550));
         primaryStage.show();
 
+        primaryStage.setOnCloseRequest(e -> Platform.exit());
     }
 
 

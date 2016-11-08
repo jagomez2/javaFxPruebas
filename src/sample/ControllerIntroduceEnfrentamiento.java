@@ -23,7 +23,7 @@ import java.sql.*;
 import java.util.*;
 
 
-public class Controller implements Initializable {
+public class ControllerIntroduceEnfrentamiento implements Initializable {
 
     @FXML
     private ChoiceBox<String> jornada;
