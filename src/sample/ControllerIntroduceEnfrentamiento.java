@@ -72,6 +72,7 @@ public class ControllerIntroduceEnfrentamiento implements Initializable {
     private int numJorndaSeleccionada;
     private int numEnfrentamientoSeleccionado;
     private String nombreJornada;
+    private String estilo="-fx-background-color: #d0d0d0";
 
 
     @Override
@@ -100,7 +101,6 @@ public class ControllerIntroduceEnfrentamiento implements Initializable {
 
 
         conectaBBDD();
-
         botonSubmit.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -149,7 +149,7 @@ public class ControllerIntroduceEnfrentamiento implements Initializable {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
                 limpiaCombos();
-
+                botonSubmit.setStyle(estilo);
                 String t[];
                 Integer id;
                 //     System.out.println("Valor nuevo "+ newValue);
@@ -319,6 +319,12 @@ public class ControllerIntroduceEnfrentamiento implements Initializable {
 
         }
 
+        puntosLocal19.setText("");
+        puntosLocal19.setStyle("-fx-control-inner-background: red");
+        puntosVisitante19.setText("");
+        puntosVisitante19.setStyle("-fx-control-inner-background: red");
+        sumaLocal19.setText("");
+        sumaVisitante19.setText("");
     }
 
     private void inicializarListas() {

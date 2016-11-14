@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.*;
@@ -87,8 +89,11 @@ public class ControllerVisualizaEnfrentamiento implements Initializable {
             @Override
             public void handle(ActionEvent e) {
 
-
+                Stage stage = (Stage) botonSubmit.getScene().getWindow();
+                stage.close();
             }
+
+
         });
         jornada.setItems(inicializaComboJornadas());
         jornada.valueProperty().addListener(new ChangeListener<String>() {
