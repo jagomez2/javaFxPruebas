@@ -11,443 +11,383 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<GridPane alignment="center" hgap="10" prefHeight="620.0" prefWidth="666.0" vgap="10.0"
-          xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerIntroduceEnfrentamiento">
+<GridPane alignment="center" hgap="10" prefHeight="620.0" prefWidth="666.0" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerIntroduceEnfrentamiento">
     <columnConstraints>
-        <ColumnConstraints/>
-        <ColumnConstraints fillWidth="false"/>
+        <ColumnConstraints />
+        <ColumnConstraints fillWidth="false" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0"/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+        <RowConstraints />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="15.0" />
+      <RowConstraints minHeight="10.0" prefHeight="15.0" />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
     </rowConstraints>
     <children>
-        <Pane prefHeight="560.0" prefWidth="650.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <Pane prefHeight="560.0" prefWidth="650.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
             <children>
                 <GridPane maxWidth="-Infinity">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="NEVER" minWidth="30.0" prefWidth="30.0"/>
-                        <ColumnConstraints hgrow="NEVER" minWidth="185.0" prefWidth="185.0"/>
-                        <ColumnConstraints hgrow="NEVER" minWidth="40.0" prefWidth="30.0"/>
-                        <ColumnConstraints hgrow="NEVER" minWidth="55.0" prefWidth="40.0"/>
-                        <ColumnConstraints hgrow="NEVER" minWidth="30.0" prefWidth="30.0"/>
-                        <ColumnConstraints hgrow="NEVER" minWidth="185.0" prefWidth="185.0"/>
-                        <ColumnConstraints hgrow="NEVER" minWidth="40.0" prefWidth="30.0"/>
-                        <ColumnConstraints hgrow="NEVER" minWidth="55.0" prefWidth="40.0"/>
+                        <ColumnConstraints hgrow="NEVER" minWidth="30.0" prefWidth="30.0" />
+                        <ColumnConstraints hgrow="NEVER" minWidth="185.0" prefWidth="185.0" />
+                        <ColumnConstraints hgrow="NEVER" minWidth="40.0" prefWidth="30.0" />
+                        <ColumnConstraints hgrow="NEVER" minWidth="55.0" prefWidth="40.0" />
+                        <ColumnConstraints hgrow="NEVER" minWidth="30.0" prefWidth="30.0" />
+                        <ColumnConstraints hgrow="NEVER" minWidth="185.0" prefWidth="185.0" />
+                        <ColumnConstraints hgrow="NEVER" minWidth="40.0" prefWidth="30.0" />
+                        <ColumnConstraints hgrow="NEVER" minWidth="55.0" prefWidth="40.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
-                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER"/>
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
                     </rowConstraints>
                     <children>
                         <!--Aqui Row0-->
                         <TextField editable="false" text="1">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l1" prefWidth="185.0" GridPane.columnIndex="1"/>
-                        <TextField fx:id="puntosLocal1" GridPane.columnIndex="2"/>
-                        <TextField fx:id="sumaLocal1" editable="false" GridPane.columnIndex="3"/>
+                        <ChoiceBox fx:id="l1" prefWidth="185.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="puntosLocal1" GridPane.columnIndex="2" />
+                        <TextField fx:id="sumaLocal1" editable="false" GridPane.columnIndex="3" />
                         <TextField editable="false" text="1" GridPane.columnIndex="4">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v1" prefWidth="185.0" GridPane.columnIndex="5"/>
-                        <TextField fx:id="puntosVisitante1" GridPane.columnIndex="6"/>
-                        <TextField fx:id="sumaVisitante1" editable="false" GridPane.columnIndex="7"/>
+                        <ChoiceBox fx:id="v1" prefWidth="185.0" GridPane.columnIndex="5" />
+                        <TextField fx:id="puntosVisitante1" GridPane.columnIndex="6" />
+                        <TextField fx:id="sumaVisitante1" editable="false" GridPane.columnIndex="7" />
 
                         <!--Aqui Row1-->
                         <TextField editable="false" text="2" GridPane.rowIndex="1">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l2" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                        <TextField fx:id="puntosLocal2" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                        <TextField fx:id="sumaLocal2" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                        <ChoiceBox fx:id="l2" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="puntosLocal2" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextField fx:id="sumaLocal2" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                         <TextField editable="false" text="2" GridPane.columnIndex="4" GridPane.rowIndex="1">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v2" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
-                        <TextField fx:id="puntosVisitante2" GridPane.columnIndex="6" GridPane.rowIndex="1"/>
-                        <TextField fx:id="sumaVisitante2" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="1"/>
+                        <ChoiceBox fx:id="v2" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                        <TextField fx:id="puntosVisitante2" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                        <TextField fx:id="sumaVisitante2" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="1" />
 
                         <!--Aqui Row2-->
                         <TextField editable="false" text="3" GridPane.rowIndex="2">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l3" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                        <TextField fx:id="puntosLocal3" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
-                        <TextField fx:id="sumaLocal3" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                        <ChoiceBox fx:id="l3" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="puntosLocal3" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <TextField fx:id="sumaLocal3" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                         <TextField editable="false" text="3" GridPane.columnIndex="4" GridPane.rowIndex="2">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v3" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="2"/>
-                        <TextField fx:id="puntosVisitante3" GridPane.columnIndex="6" GridPane.rowIndex="2"/>
-                        <TextField fx:id="sumaVisitante3" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="2"/>
+                        <ChoiceBox fx:id="v3" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                        <TextField fx:id="puntosVisitante3" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                        <TextField fx:id="sumaVisitante3" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="2" />
                         <!--Aqui Row3-->
                         <TextField editable="false" text="1" GridPane.rowIndex="3">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l4" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="3"/>
-                        <TextField fx:id="puntosLocal4" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
-                        <TextField fx:id="sumaLocal4" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+                        <ChoiceBox fx:id="l4" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="puntosLocal4" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <TextField fx:id="sumaLocal4" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                         <TextField editable="false" text="2" GridPane.columnIndex="4" GridPane.rowIndex="3">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v4" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="3"/>
-                        <TextField fx:id="puntosVisitante4" GridPane.columnIndex="6" GridPane.rowIndex="3"/>
-                        <TextField fx:id="sumaVisitante4" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="3"/>
+                        <ChoiceBox fx:id="v4" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                        <TextField fx:id="puntosVisitante4" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                        <TextField fx:id="sumaVisitante4" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="3" />
                         <!--Aqui Row4-->
                         <TextField editable="false" text="2" GridPane.rowIndex="4">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l5" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="4"/>
-                        <TextField fx:id="puntosLocal5" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
-                        <TextField fx:id="sumaLocal5" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+                        <ChoiceBox fx:id="l5" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="puntosLocal5" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <TextField fx:id="sumaLocal5" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                         <TextField editable="false" text="3" GridPane.columnIndex="4" GridPane.rowIndex="4">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v5" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="4"/>
-                        <TextField fx:id="puntosVisitante5" GridPane.columnIndex="6" GridPane.rowIndex="4"/>
-                        <TextField fx:id="sumaVisitante5" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="4"/>
+                        <ChoiceBox fx:id="v5" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                        <TextField fx:id="puntosVisitante5" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                        <TextField fx:id="sumaVisitante5" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="4" />
                         <!--Aqui Row5-->
                         <TextField editable="false" text="3" GridPane.rowIndex="5">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l6" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="5"/>
-                        <TextField fx:id="puntosLocal6" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
-                        <TextField fx:id="sumaLocal6" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+                        <ChoiceBox fx:id="l6" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <TextField fx:id="puntosLocal6" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <TextField fx:id="sumaLocal6" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                         <TextField editable="false" text="1" GridPane.columnIndex="4" GridPane.rowIndex="5">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v6" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="5"/>
-                        <TextField fx:id="puntosVisitante6" GridPane.columnIndex="6" GridPane.rowIndex="5"/>
-                        <TextField fx:id="sumaVisitante6" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="5"/>
+                        <ChoiceBox fx:id="v6" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                        <TextField fx:id="puntosVisitante6" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                        <TextField fx:id="sumaVisitante6" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="5" />
                         <!--Aqui Row6-->
                         <TextField editable="false" text="1" GridPane.rowIndex="6">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l7" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="6"/>
-                        <TextField fx:id="puntosLocal7" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
-                        <TextField fx:id="sumaLocal7" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
+                        <ChoiceBox fx:id="l7" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <TextField fx:id="puntosLocal7" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <TextField fx:id="sumaLocal7" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="6" />
                         <TextField editable="false" text="3" GridPane.columnIndex="4" GridPane.rowIndex="6">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v7" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="6"/>
-                        <TextField fx:id="puntosVisitante7" GridPane.columnIndex="6" GridPane.rowIndex="6"/>
-                        <TextField fx:id="sumaVisitante7" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="6"/>
+                        <ChoiceBox fx:id="v7" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                        <TextField fx:id="puntosVisitante7" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                        <TextField fx:id="sumaVisitante7" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="6" />
                         <!--Aqui Row7-->
                         <TextField editable="false" text="2" GridPane.rowIndex="7">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l8" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="7"/>
-                        <TextField fx:id="puntosLocal8" GridPane.columnIndex="2" GridPane.rowIndex="7"/>
-                        <TextField fx:id="sumaLocal8" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="7"/>
+                        <ChoiceBox fx:id="l8" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <TextField fx:id="puntosLocal8" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                        <TextField fx:id="sumaLocal8" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="7" />
                         <TextField editable="false" text="1" GridPane.columnIndex="4" GridPane.rowIndex="7">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v8" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="7"/>
-                        <TextField fx:id="puntosVisitante8" GridPane.columnIndex="6" GridPane.rowIndex="7"/>
-                        <TextField fx:id="sumaVisitante8" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="7"/>
+                        <ChoiceBox fx:id="v8" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                        <TextField fx:id="puntosVisitante8" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                        <TextField fx:id="sumaVisitante8" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="7" />
                         <!--Aqui Row8-->
                         <TextField editable="false" text="3" GridPane.rowIndex="8">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l9" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="8"/>
-                        <TextField fx:id="puntosLocal9" GridPane.columnIndex="2" GridPane.rowIndex="8"/>
-                        <TextField fx:id="sumaLocal9" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="8"/>
+                        <ChoiceBox fx:id="l9" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <TextField fx:id="puntosLocal9" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                        <TextField fx:id="sumaLocal9" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="8" />
                         <TextField editable="false" text="2" GridPane.columnIndex="4" GridPane.rowIndex="8">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v9" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="8"/>
-                        <TextField fx:id="puntosVisitante9" GridPane.columnIndex="6" GridPane.rowIndex="8"/>
-                        <TextField fx:id="sumaVisitante9" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="8"/>
+                        <ChoiceBox fx:id="v9" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                        <TextField fx:id="puntosVisitante9" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+                        <TextField fx:id="sumaVisitante9" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="8" />
                         <!--Aqui Row9-->
                         <TextField editable="false" text="1" GridPane.rowIndex="9">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l10" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="9"/>
-                        <TextField fx:id="puntosLocal10" GridPane.columnIndex="2" GridPane.rowIndex="9"/>
-                        <TextField fx:id="sumaLocal10" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="9"/>
+                        <ChoiceBox fx:id="l10" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <TextField fx:id="puntosLocal10" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                        <TextField fx:id="sumaLocal10" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="9" />
                         <TextField editable="false" text="1" GridPane.columnIndex="4" GridPane.rowIndex="9">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v10" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="9"/>
-                        <TextField fx:id="puntosVisitante10" GridPane.columnIndex="6" GridPane.rowIndex="9"/>
-                        <TextField fx:id="sumaVisitante10" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="9"/>
+                        <ChoiceBox fx:id="v10" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="9" />
+                        <TextField fx:id="puntosVisitante10" GridPane.columnIndex="6" GridPane.rowIndex="9" />
+                        <TextField fx:id="sumaVisitante10" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="9" />
                         <!--Aqui Row10-->
                         <TextField editable="false" text="2" GridPane.rowIndex="10">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l11" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="10"/>
-                        <TextField fx:id="puntosLocal11" GridPane.columnIndex="2" GridPane.rowIndex="10"/>
-                        <TextField fx:id="sumaLocal11" editable="false" GridPane.columnIndex="3"
-                                   GridPane.rowIndex="10"/>
+                        <ChoiceBox fx:id="l11" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <TextField fx:id="puntosLocal11" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                        <TextField fx:id="sumaLocal11" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="10" />
                         <TextField editable="false" text="2" GridPane.columnIndex="4" GridPane.rowIndex="10">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v11" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="10"/>
-                        <TextField fx:id="puntosVisitante11" GridPane.columnIndex="6" GridPane.rowIndex="10"/>
-                        <TextField fx:id="sumaVisitante11" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="10"/>
+                        <ChoiceBox fx:id="v11" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="10" />
+                        <TextField fx:id="puntosVisitante11" GridPane.columnIndex="6" GridPane.rowIndex="10" />
+                        <TextField fx:id="sumaVisitante11" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="10" />
                         <!--Aqui Row11-->
                         <TextField editable="false" text="3" GridPane.rowIndex="11">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l12" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="11"/>
-                        <TextField fx:id="puntosLocal12" GridPane.columnIndex="2" GridPane.rowIndex="11"/>
-                        <TextField fx:id="sumaLocal12" editable="false" GridPane.columnIndex="3"
-                                   GridPane.rowIndex="11"/>
+                        <ChoiceBox fx:id="l12" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                        <TextField fx:id="puntosLocal12" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                        <TextField fx:id="sumaLocal12" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="11" />
                         <TextField editable="false" text="3" GridPane.columnIndex="4" GridPane.rowIndex="11">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v12" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="11"/>
-                        <TextField fx:id="puntosVisitante12" GridPane.columnIndex="6" GridPane.rowIndex="11"/>
-                        <TextField fx:id="sumaVisitante12" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="11"/>
+                        <ChoiceBox fx:id="v12" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="11" />
+                        <TextField fx:id="puntosVisitante12" GridPane.columnIndex="6" GridPane.rowIndex="11" />
+                        <TextField fx:id="sumaVisitante12" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="11" />
                         <!--Aqui Row12-->
                         <TextField editable="false" text="1" GridPane.rowIndex="12">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l13" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="12"/>
-                        <TextField fx:id="puntosLocal13" GridPane.columnIndex="2" GridPane.rowIndex="12"/>
-                        <TextField fx:id="sumaLocal13" editable="false" GridPane.columnIndex="3"
-                                   GridPane.rowIndex="12"/>
+                        <ChoiceBox fx:id="l13" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                        <TextField fx:id="puntosLocal13" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+                        <TextField fx:id="sumaLocal13" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="12" />
                         <TextField editable="false" text="2" GridPane.columnIndex="4" GridPane.rowIndex="12">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v13" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="12"/>
-                        <TextField fx:id="puntosVisitante13" GridPane.columnIndex="6" GridPane.rowIndex="12"/>
-                        <TextField fx:id="sumaVisitante13" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="12"/>
+                        <ChoiceBox fx:id="v13" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="12" />
+                        <TextField fx:id="puntosVisitante13" GridPane.columnIndex="6" GridPane.rowIndex="12" />
+                        <TextField fx:id="sumaVisitante13" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="12" />
                         <!--Aqui Row13-->
                         <TextField editable="false" text="2" GridPane.rowIndex="13">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l14" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="13"/>
-                        <TextField fx:id="puntosLocal14" GridPane.columnIndex="2" GridPane.rowIndex="13"/>
-                        <TextField fx:id="sumaLocal14" editable="false" GridPane.columnIndex="3"
-                                   GridPane.rowIndex="13"/>
+                        <ChoiceBox fx:id="l14" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                        <TextField fx:id="puntosLocal14" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+                        <TextField fx:id="sumaLocal14" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="13" />
                         <TextField editable="false" text="3" GridPane.columnIndex="4" GridPane.rowIndex="13">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v14" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="13"/>
-                        <TextField fx:id="puntosVisitante14" GridPane.columnIndex="6" GridPane.rowIndex="13"/>
-                        <TextField fx:id="sumaVisitante14" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="13"/>
+                        <ChoiceBox fx:id="v14" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="13" />
+                        <TextField fx:id="puntosVisitante14" GridPane.columnIndex="6" GridPane.rowIndex="13" />
+                        <TextField fx:id="sumaVisitante14" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="13" />
                         <!--Aqui Row14-->
                         <TextField editable="false" text="3" GridPane.rowIndex="14">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l15" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="14"/>
-                        <TextField fx:id="puntosLocal15" GridPane.columnIndex="2" GridPane.rowIndex="14"/>
-                        <TextField fx:id="sumaLocal15" editable="false" GridPane.columnIndex="3"
-                                   GridPane.rowIndex="14"/>
+                        <ChoiceBox fx:id="l15" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                        <TextField fx:id="puntosLocal15" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+                        <TextField fx:id="sumaLocal15" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="14" />
                         <TextField editable="false" text="1" GridPane.columnIndex="4" GridPane.rowIndex="14">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v15" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="14"/>
-                        <TextField fx:id="puntosVisitante15" GridPane.columnIndex="6" GridPane.rowIndex="14"/>
-                        <TextField fx:id="sumaVisitante15" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="14"/>
+                        <ChoiceBox fx:id="v15" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="14" />
+                        <TextField fx:id="puntosVisitante15" GridPane.columnIndex="6" GridPane.rowIndex="14" />
+                        <TextField fx:id="sumaVisitante15" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="14" />
 
                         <!--Aqui Row15-->
                         <TextField editable="false" text="1" GridPane.rowIndex="15">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l16" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="15"/>
-                        <TextField fx:id="puntosLocal16" GridPane.columnIndex="2" GridPane.rowIndex="15"/>
-                        <TextField fx:id="sumaLocal16" editable="false" GridPane.columnIndex="3"
-                                   GridPane.rowIndex="15"/>
+                        <ChoiceBox fx:id="l16" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                        <TextField fx:id="puntosLocal16" GridPane.columnIndex="2" GridPane.rowIndex="15" />
+                        <TextField fx:id="sumaLocal16" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="15" />
                         <TextField editable="false" text="3" GridPane.columnIndex="4" GridPane.rowIndex="15">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v16" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="15"/>
-                        <TextField fx:id="puntosVisitante16" GridPane.columnIndex="6" GridPane.rowIndex="15"/>
-                        <TextField fx:id="sumaVisitante16" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="15"/>
+                        <ChoiceBox fx:id="v16" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="15" />
+                        <TextField fx:id="puntosVisitante16" GridPane.columnIndex="6" GridPane.rowIndex="15" />
+                        <TextField fx:id="sumaVisitante16" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="15" />
                         <!--Aqui Row16-->
                         <TextField editable="false" text="2" GridPane.rowIndex="16">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l17" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="16"/>
-                        <TextField fx:id="puntosLocal17" GridPane.columnIndex="2" GridPane.rowIndex="16"/>
-                        <TextField fx:id="sumaLocal17" editable="false" GridPane.columnIndex="3"
-                                   GridPane.rowIndex="16"/>
+                        <ChoiceBox fx:id="l17" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                        <TextField fx:id="puntosLocal17" GridPane.columnIndex="2" GridPane.rowIndex="16" />
+                        <TextField fx:id="sumaLocal17" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="16" />
                         <TextField editable="false" text="1" GridPane.columnIndex="4" GridPane.rowIndex="16">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v17" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="16"/>
-                        <TextField fx:id="puntosVisitante17" GridPane.columnIndex="6" GridPane.rowIndex="16"/>
-                        <TextField fx:id="sumaVisitante17" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="16"/>
+                        <ChoiceBox fx:id="v17" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="16" />
+                        <TextField fx:id="puntosVisitante17" GridPane.columnIndex="6" GridPane.rowIndex="16" />
+                        <TextField fx:id="sumaVisitante17" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="16" />
                         <!--Aqui Row17-->
                         <TextField editable="false" text="3" GridPane.rowIndex="17">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="l18" disable="true" prefWidth="185.0" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="17"/>
-                        <TextField fx:id="puntosLocal18" GridPane.columnIndex="2" GridPane.rowIndex="17"/>
-                        <TextField fx:id="sumaLocal18" editable="false" GridPane.columnIndex="3"
-                                   GridPane.rowIndex="17"/>
+                        <ChoiceBox fx:id="l18" disable="true" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                        <TextField fx:id="puntosLocal18" GridPane.columnIndex="2" GridPane.rowIndex="17" />
+                        <TextField fx:id="sumaLocal18" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="17" />
                         <TextField editable="false" text="2" GridPane.columnIndex="4" GridPane.rowIndex="17">
                             <font>
-                                <Font name="System Bold" size="13.0"/>
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </TextField>
-                        <ChoiceBox fx:id="v18" disable="true" prefWidth="185.0" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="17"/>
-                        <TextField fx:id="puntosVisitante18" GridPane.columnIndex="6" GridPane.rowIndex="17"/>
-                        <TextField fx:id="sumaVisitante18" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="17"/>
+                        <ChoiceBox fx:id="v18" disable="true" prefWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="17" />
+                        <TextField fx:id="puntosVisitante18" GridPane.columnIndex="6" GridPane.rowIndex="17" />
+                        <TextField fx:id="sumaVisitante18" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="17" />
                         <!--Aqui Row18-->
                         <TextField editable="false" text="EQ" GridPane.rowIndex="18">
                             <font>
-                                <Font name="System Bold" size="10.0"/>
+                                <Font name="System Bold" size="10.0" />
                             </font>
                         </TextField>
-                        <TextField fx:id="e1" prefWidth="185.0" text="Equipo Local" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="18"/>
-                        <TextField fx:id="puntosLocal19" GridPane.columnIndex="2" GridPane.rowIndex="18"/>
-                        <TextField fx:id="sumaLocal19" editable="false" GridPane.columnIndex="3"
-                                   GridPane.rowIndex="18"/>
+                        <TextField fx:id="e1" prefWidth="185.0" text="Equipo Local" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                        <TextField fx:id="puntosLocal19" GridPane.columnIndex="2" GridPane.rowIndex="18" />
+                        <TextField fx:id="sumaLocal19" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="18" />
                         <TextField editable="false" text="EQ" GridPane.columnIndex="4" GridPane.rowIndex="18">
                             <font>
-                                <Font name="System Bold" size="10.0"/>
+                                <Font name="System Bold" size="10.0" />
                             </font>
                         </TextField>
-                        <TextField fx:id="e2" prefWidth="185.0" text="Equipo Visitante" GridPane.columnIndex="5"
-                                   GridPane.rowIndex="18"/>
-                        <TextField fx:id="puntosVisitante19" GridPane.columnIndex="6" GridPane.rowIndex="18"/>
-                        <TextField fx:id="sumaVisitante19" editable="false" GridPane.columnIndex="7"
-                                   GridPane.rowIndex="18"/>
+                        <TextField fx:id="e2" prefWidth="185.0" text="Equipo Visitante" GridPane.columnIndex="5" GridPane.rowIndex="18" />
+                        <TextField fx:id="puntosVisitante19" GridPane.columnIndex="6" GridPane.rowIndex="18" />
+                        <TextField fx:id="sumaVisitante19" editable="false" GridPane.columnIndex="7" GridPane.rowIndex="18" />
 
                     </children>
 
@@ -455,16 +395,13 @@
                 </GridPane>
             </children>
         </Pane>
-        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Indique la jornada a continuacion"
-               textAlignment="RIGHT" GridPane.columnIndex="1"/>
-        <ChoiceBox fx:id="jornada" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT"/>
-        <ChoiceBox fx:id="equiposEnfrentamiento" prefHeight="26.0" prefWidth="589.0" GridPane.columnIndex="1"
-                   GridPane.rowIndex="1"/>
-        <CheckBox fx:id="checkBoxCambios" allowIndeterminate="false" mnemonicParsing="false"
-                  text="Marcar para poder hacer cambios" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-        <Button fx:id="botonSubmit" disable="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="177.0"
-                text="Button" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5"/>
-        <CheckBox fx:id="checkBoxTextoBD" prefHeight="26.0" prefWidth="177.0" text="Exportar archivo de texto"
-                  GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5"/>
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Indique la jornada a continuacion" textAlignment="RIGHT" GridPane.columnIndex="1" />
+        <ChoiceBox fx:id="jornada" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+        <ChoiceBox fx:id="equiposEnfrentamiento" prefHeight="26.0" prefWidth="589.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <CheckBox fx:id="checkBoxCambios" allowIndeterminate="false" mnemonicParsing="false" text="Marcar para poder hacer cambios" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Button fx:id="botonSubmit" disable="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="177.0" text="Button" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+        <CheckBox fx:id="checkBoxTextoBD" prefHeight="26.0" prefWidth="177.0" text="Exportar archivo de texto" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6" />
+      <CheckBox fx:id="localNoPresentado" text="Equipo Local No Presentado" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <CheckBox fx:id="visitanteNoPresentado" text="Equipo Visitante No Presentado   " GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
     </children>
 </GridPane>

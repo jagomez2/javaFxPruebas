@@ -30,7 +30,7 @@ public class ControllerIntroduceEnfrentamiento implements Initializable {
     @FXML
     private ChoiceBox<String> equiposEnfrentamiento;
     @FXML
-    private CheckBox checkBoxCambios, checkBoxTextoBD;
+    private CheckBox checkBoxCambios, checkBoxTextoBD,localNoPresentado,visitanteNoPresentado;
     @FXML
     private ChoiceBox<String> l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, l18;
     @FXML
@@ -106,7 +106,7 @@ public class ControllerIntroduceEnfrentamiento implements Initializable {
             @Override
             public void handle(ActionEvent e) {
 
-                if (!checkBoxTextoBD.isSelected()) {
+                if (!checkBoxTextoBD.isSelected() && !localNoPresentado.isSelected() && !visitanteNoPresentado.isSelected()) {
                     boolean correcto1, correcto2, correcto3, correcto4;
                     correcto1 = borraPartidasEnfrentamiento();
 
@@ -125,11 +125,19 @@ public class ControllerIntroduceEnfrentamiento implements Initializable {
 
                     }
 
-                } else {
+                } else if(checkBoxTextoBD.isSelected() && !localNoPresentado.isSelected() && !visitanteNoPresentado.isSelected()){
 
 
                     imprimePartidasEnFicheroDeTexto(nombreJornada);
 
+                }
+                else if(localNoPresentado.isSelected()){
+
+                    enfrentamientoNoPresentadoEnBD(true);
+
+                }else if (visitanteNoPresentado.isSelected()){
+
+                    enfrentamientoNoPresentadoEnBD(false);
                 }
 
             }
@@ -149,6 +157,11 @@ public class ControllerIntroduceEnfrentamiento implements Initializable {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
                 limpiaCombos();
+                localNoPresentado.setSelected(false);
+                visitanteNoPresentado.setSelected(false);
+                checkBoxTextoBD.setSelected(false);
+
+
                 botonSubmit.setStyle(estilo);
                 String t[];
                 Integer id;
@@ -206,6 +219,49 @@ public class ControllerIntroduceEnfrentamiento implements Initializable {
                     }
                 }
 
+            }
+        });
+
+        localNoPresentado.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (oldValue == false && newValue == true) {
+
+                    deshabilitarTodo();
+                    visitanteNoPresentado.setDisable(true);
+                    checkBoxTextoBD.setDisable(true);
+                    botonSubmit.setDisable(false);
+
+                }
+                else{
+
+                    habilitarTodo();
+                    visitanteNoPresentado.setDisable(false);
+                    checkBoxTextoBD.setDisable(false);
+                    botonSubmit.setDisable(true);
+
+                }
+            }
+        });
+
+        visitanteNoPresentado.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (oldValue == false && newValue == true) {
+
+                    deshabilitarTodo();
+                    localNoPresentado.setDisable(true);
+                    checkBoxTextoBD.setDisable(true);
+                    botonSubmit.setDisable(false);
+                }
+                else{
+
+                    habilitarTodo();
+                    localNoPresentado.setDisable(false);
+                    checkBoxTextoBD.setDisable(false);
+                    botonSubmit.setDisable(true);
+
+                }
             }
         });
 
@@ -608,6 +664,80 @@ public class ControllerIntroduceEnfrentamiento implements Initializable {
 
 
         return true;
+    }
+    private void deshabilitarTodo(){
+
+
+        for (ChoiceBox c:listaCombosLocales
+             ) {
+            c.setDisable(true);
+        }
+        for (ChoiceBox c:listaCombosVisitantes
+                ) {
+            c.setDisable(true);
+        }
+        for (TextField t:puntosLocal){
+
+            t.setDisable(true);
+        }
+        for (TextField t:puntosVisitante){
+
+            t.setDisable(true);
+        }
+        checkBoxCambios.setDisable(true);
+
+    }
+
+    private void habilitarTodo(){
+
+
+        for (ChoiceBox c:listaCombosLocales
+                ) {
+            c.setDisable(false);
+        }
+        for (ChoiceBox c:listaCombosVisitantes
+                ) {
+            c.setDisable(false);
+        }
+        for (TextField t:puntosLocal){
+
+            t.setDisable(false);
+        }
+        for (TextField t:puntosVisitante){
+
+            t.setDisable(false);
+        }
+        checkBoxCambios.setDisable(false);
+
+    }
+
+    public void enfrentamientoNoPresentadoEnBD(boolean local){
+
+        try {
+
+            PreparedStatement sentencia = conexion.prepareStatement("Update Enfrentamiento set ResultadoLocal=?,ResultadoVisitante=? where idEnfrentamiento=?");
+
+            if (local){
+
+                sentencia.setInt(1, -1);
+                sentencia.setInt(2, 0);
+            }
+            else{
+
+                sentencia.setInt(1, 0);
+                sentencia.setInt(2, -1);
+
+            }
+            sentencia.setInt(3, numEnfrentamientoSeleccionado);
+
+            sentencia.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
     }
 
     public class MiChangeListener<String> implements ChangeListener<String> {

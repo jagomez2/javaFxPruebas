@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml" fx:controller="sample.ControllerEstadisticas">
-    <children>
-        <Button id="button" layoutX="126" layoutY="90" text="Click Me!"  fx:id="button" />
-        <Label id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" prefHeight="16" prefWidth="69" fx:id="label" />
-    </children>
-</AnchorPane>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.TextFlow?>
+
+
+<?import javafx.scene.control.TextArea?>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerEstadisticas">
+   <children>
+      <TextArea fx:id="texto" prefHeight="600.0" prefWidth="800.0"/>
+   </children>
+</Pane>

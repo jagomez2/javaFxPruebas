@@ -81,7 +81,7 @@ public class Main extends Application {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("estadisticas.fxml"));
                 Parent root1 = fxmlLoader.load();
                 Stage stage = new Stage();
-                stage.setScene(new Scene(root1, 650, 760));
+                stage.setScene(new Scene(root1, 800, 600));
                 stage.show();
             } catch(Exception e) {
                 e.printStackTrace();
